@@ -1,0 +1,44 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %} Mes commandes {% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block body %}
+    <div class="menu-panier d-flex flex-column justify-content-evenly" style="height:200px;padding:0% 5% 0% 5%;background-color:#F0F0F0">
+        <h3 class="fw-bold">Profil</h3>
+        <div class="liste-infos d-flex">
+            <div class="liste-liens d-flex w-50 justify-content-between" style="padding:0% 20% 0% 0%">
+                <a href="{{ path('app_profile') }}" class="border-bottom border-2  border-primary">Général</a>
+                <a href="{{ path('app_adresse') }}" class=" border-primary">Adresse</a>
+                <a href="{{ path('app_commande') }}" class="border-primary">Achats et factures</a>
+            </div>
+            <p class="fw-bold text-end w-50">
+                <span class="border-bottom border-dark border-2">Portefeuille:</span> {{ montant}} XOF
+            </p>
+        </div>
+    </div>
+    <!-- body   -->
+    <div class="liste-liens d-flex w-25 justify-content-between" style="padding:3% 5% 0% 5%">
+        <a href="" class="border-bottom border-3 border-primary p-2 text-dark text-hover">Achats</a>
+
+    </div>
+    <div class="ligne mb-5"  style="padding: 0% 5% 0% 5%">
+        <hr>
+    </div>
+    <div class="liste-commande d-flex flex-column justify-content-between mb-5">
+
+        {% for cmd in commandes %}
+        <div class="commande d-flex justify-content-between mb-2" style="padding: 0% 5% 0% 5%">
+            <span>{{ cmd.slug }}</span>
+            <span>{{ cmd.date | date('d-m-y H:i') }}</span>
+            <span>{{ cmd.etat }}</span>
+            <span >
+                <a href="{{ path('app_facture', {'slug':cmd.slug})}}" target="_blank" class="btn btn-primary">Facture</a>
+            </span>
+        </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
